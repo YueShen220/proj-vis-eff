@@ -12,7 +12,7 @@ Supervised learning, Computer Vision and Robotics.\
  DVS128 gesture dataset: https://www.research.ibm.com/dvsgesture/ \
  Other gesture datasets: https://nexocode.com/blog/posts/gestures-recognition-challenges-and-opportunities/ \
 **Articles:**\
- Indigenous Protocol and AI, 2020: https://spectrum.library.concordia.ca/986506/7/Indigenous_Protocol_and_AI_2020.pdf
+ Indigenous Protocol and AI, 2020: https://spectrum.library.concordia.ca/986506/7/Indigenous_Protocol_and_AI_2020.pdf \
 **Sheets: Meetings & AI protocol followup:**\
 Drive: https://drive.google.com/drive/u/0/folders/13Uf6PGBFPqEWyhpMi9c_LS3WjaJpZoEU
 
