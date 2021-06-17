@@ -13,7 +13,7 @@ Supervised learning, Computer Vision and Robotics.\
  Other gesture datasets: https://nexocode.com/blog/posts/gestures-recognition-challenges-and-opportunities/ \
 **Articles:**\
  Indigenous Protocol and AI, 2020: https://spectrum.library.concordia.ca/986506/7/Indigenous_Protocol_and_AI_2020.pdf \
-**Meetings & AI protocol followup:**\
+**Meetings & AI protocol follow up:**\
 Drive: https://drive.google.com/drive/u/0/folders/13Uf6PGBFPqEWyhpMi9c_LS3WjaJpZoEU
 
 ## Current Progress
