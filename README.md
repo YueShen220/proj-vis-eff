@@ -1,6 +1,6 @@
 # VFX Group Project --- Santiago, Emilie and Yue
 
-##Project Description
+## Project Description
 This project is to build AI tools for gesture-based interfaces 
 using indigenous perspectives.\
 Our focus is to generate visual effects from gestures.\
@@ -12,7 +12,7 @@ Our focus is to generate visual effects from gestures.\
 **Articles**\
  Indigenous Protocol and AI, 2020: https://spectrum.library.concordia.ca/986506/7/Indigenous_Protocol_and_AI_2020.pdf
 
-##Current Progress
+## Current Progress
 Learning Korbit Machine Learning modules.\
 Learning new languages such as CSS/php or other techniques.\
 Specifying our project focus.\
