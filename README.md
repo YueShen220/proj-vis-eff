@@ -14,7 +14,7 @@ Supervised learning, Computer Vision and Robotics.\
 **Articles:**\
  Indigenous Protocol and AI, 2020: https://spectrum.library.concordia.ca/986506/7/Indigenous_Protocol_and_AI_2020.pdf
 **Sheets: Meetings & AI protocol followup:**\
-Drive: https://docs.google.com/spreadsheets/d/1HO7pgr-fdojmWLoq7V9jXDK1fXlAq6p7/edit#gid=371470692 
+Drive: https://drive.google.com/drive/u/0/folders/13Uf6PGBFPqEWyhpMi9c_LS3WjaJpZoEU
 
 ## Current Progress
 - Learning Korbit Machine Learning modules.
