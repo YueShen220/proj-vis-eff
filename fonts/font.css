@@ -1,0 +1,17 @@
+@font-face {
+  font-family: 'ZILAPGEOMETRIK';
+  src: url('ZILAPGEOMETRIK.svg#ZILAPGEOMETRIK') format('svg'),
+       url('ZILAPGEOMETRIK.ttf') format('truetype'),
+       url('ZILAPGEOMETRIK.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ZilapGeometrik-VnKy';
+  src: url('ZilapGeometrik-VnKy.eot');
+  src: url('ZilapGeometrik-VnKy.eot?#iefix') format('embedded-opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+

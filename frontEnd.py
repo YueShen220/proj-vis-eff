@@ -13,27 +13,27 @@ cgitb.enable()
 
 animations = {
     "left": """
-                left: 200px;
+                left: 20%;
             }
     
             @keyframes actor {
-                0% {left:200px; transform: rotate(0deg);}
-                30% {left:450px; transform: rotate(-20deg);}
-                50% {left:700px; transform: rotate(40deg);}
-                80% {left:100px; transform: rotate(-20deg);}
-                100% {left:200px; transform: rotate(0deg);}
+                0% {left:20%; transform: rotate(0deg);}
+                30% {left:45%; transform: rotate(-20deg);}
+                50% {left:70%; transform: rotate(40deg);}
+                80% {left:10%; transform: rotate(-20deg);}
+                100% {left:20%; transform: rotate(0deg);}
             }
             """,
     "right": """
-            right: 200px;
+            right: 20%;
             }
     
             @keyframes actor {
-                0% {right:200px; transform: rotate(0deg);}
-                30% {right:450px; transform: rotate(-20deg);}
-                50% {right:700px; transform: rotate(40deg);}
-                80% {right:100px; transform: rotate(-20deg);}
-                100% {right:200px; transform: rotate(0deg);}
+                0% {right:20%; transform: rotate(0deg);}
+                30% {right:45%; transform: rotate(-20deg);}
+                50% {right:70%; transform: rotate(40deg);}
+                80% {right:10%; transform: rotate(-20deg);}
+                100% {right:20%; transform: rotate(0deg);}
             }
             """
 }
@@ -43,18 +43,10 @@ animation = animations["right"]
 
 def display(List: animation):
     html = """
+    
     <!DOCTYPE html>
     <html lang="en">
 
-    <!--
-
-        colors:
-            #790909
-            #000000
-            #FBFFFE
-            #5C6F68
-            #F49D37
-    -->
 
     <head>
         <style>
@@ -115,8 +107,7 @@ def display(List: animation):
                 padding: 200px min(250px, 20%);
                 margin: 100px 70px;
                 background-color: #F49D37;
-                outline: 2px dashed black;
-                outline-offset: -10px;
+                box-shadow: 0 0 0 1pt black;
                 border-radius: 25px;
             }
 
