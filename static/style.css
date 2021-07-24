@@ -40,7 +40,7 @@ h2 {
 
 header{
     color: #E4572E;
-    font-size: 100px;
+    font-size: min(100px,5vw);
     font-weight: bold;
     text-align: center;
 }
