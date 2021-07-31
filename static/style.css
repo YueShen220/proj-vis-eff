@@ -111,107 +111,247 @@ form label {
     position: relative;
 }
 
+.theater >*{
+    overflow: hidden;
+}
+
 .hand{
+    z-index: 2;
+    height: 200px;
+    width: 100px;
     position: absolute;
     display: grid;
-    grid-template-rows: 100px 100px;
-
+    grid-template-rows: 50% 50%;
+    top: 275px;
+    right: calc(50% - 100px);
+    animation: 5s linear infinite;
 }
 
 .fingers{
     display: grid;
-    grid-template-columns: 17px 2px 17px 2px 17px 2px 17px 2px 26px;
+    grid-template-columns: 17% 2% 17% 2% 17% 2% 17% 2% 26%;
+    animation: 5s linear infinite;
 }
 
 .finger{
-    padding: 50px 10px 0px 7px;
+    z-index: 3;
+    padding: 50% 50%;
     background-color: white;
-    width: 17px;
-    height: 100px;
+    width: 100%;
+    height: 100%;
     box-sizing: border-box;
+    border-radius: 12.5% 12.5% 0 0;
+    animation: 5s linear infinite;
 }
 
 .fingerSpacing{
-    padding: 50px 1px;
+    z-index: 3;
+    padding: 50% 50%;
     background-color: black;
-    width: 2px;
-    height: 100px;
+    width: 100%;
+    height: 100%;
     box-sizing: border-box;
+    animation: 5s linear infinite;
 }
 
 .thumb{
-    margin-top: 40px;
-    padding: 30px 13px;
+    margin-top: 200%;
     background-color: white;
-    width: 25px;
-    height: 60px;
+    width: 100%;
+    height: 100%;
     box-sizing: border-box;
+    border-radius: 20% 20% 40% 0;
+    animation: 5s linear infinite;
 }
 
 .palmHand{
     margin: 0;
     background-color: white;
-    padding: 50px;
-    width: 100px;
-    height: 100px;
+    padding: 50%;
+    width: 100%;
+    height: 100%;
     box-sizing: border-box;
-    border-radius: 0 0 25px 25px;
+    border-radius: 0 0 25% 25%;
+    animation: 5s linear infinite;
 }
 
-.palm {
-    animation: zoomPalm 5s linear 2s infinite;
-    top: 120px;
-    right: 20%;
-}
 
-@keyframes zoomPalm {
+@keyframes handPalm {
     0% {
-        right: 20%;
-        transform: rotate(0deg);
+        transform: scale(1) rotate(0deg);
     }
-    30% {
-        right: 45%;
-        transform: rotate(-20deg);
+    20%{
+        transform: scale(1.8) rotate(20deg);
     }
     50% {
-        right: 70%;
-        transform: rotate(40deg);
+        transform: scale(2.8) rotate(40deg);
     }
-    80% {
-        right: 10%;
-        transform: rotate(-20deg);
+    70% {
+        transform: scale(1.8) rotate(-20deg);
     }
     100% {
-        right: 20%;
-        transform: rotate(0deg);
+        transform: scale(1) rotate(0deg);
     }
 }
 
-.C {
-    animation: actorLeft 5s linear 2s infinite;
-    top: 120px;
-    left: 20%;
-}
-
-@keyframes actorLeft {
+@keyframes handFist {
     0% {
-        left: 20%;
-        transform: rotate(0deg);
+        transform: scale(1);
     }
-    30% {
-        left: 45%;
-        transform: rotate(-20deg);
+    20%{
+        transform: scale(1.8);
     }
     50% {
-        left: 70%;
-        transform: rotate(40deg);
+        transform: scale(2.8);
     }
-    80% {
-        left: 10%;
-        transform: rotate(-20deg);
+    70% {
+        transform: scale(1.8);
     }
     100% {
-        left: 20%;
-        transform: rotate(0deg);
+        transform: scale(1);
+    }
+}
+
+@keyframes fingersFist {
+    0% {
+        margin-top: 0%;
+        height: 100%;
+    }
+    20%{
+        margin-top: 300%;
+        height: 50%;
+    }
+    50% {
+        margin-top: 500%;
+        height: 20%;
+    }
+    70% {
+        margin-top: 300%;
+        height: 80%;
+    }
+    100% {
+        margin-top: 0%;
+        height: 100%;
+    }
+}
+
+@keyframes thumbFist {
+    0% {
+        margin-top: 200%;
+        height: 100%;
+        transform: rotate3d(0,1,0,0deg);
+    }
+    20%{
+        margin-top: 300%;
+        height: 80%;
+        transform: rotate3d(0,1,0,40deg);
+    }
+    50% {
+        margin-top: 300%;
+        height: 80%;
+        transform: rotate3d(0,1,0,40deg);
+    }
+    70% {
+        margin-top: 300%;
+        height: 80%;
+        transform: rotate3d(0,1,0,40deg);
+    }
+    100% {
+        margin-top: 200%;
+        height: 100%;
+        transform: rotate3d(0,1,0,0deg);
+    }
+}
+
+.C, .L {
+    z-index: 1;
+    background: transparent;
+    height: 150px;
+    width: 50px;
+    border:solid 25px transparent;
+    position: absolute;
+    top: 275px;
+    right: calc(50% - 125px);
+    animation: 5s linear infinite;
+}
+
+.C{
+    border-radius: 50% 50%;
+}
+
+@keyframes handC {
+    0% {
+        transform: rotate3d(0,2,0,0deg);
+    }
+    10% {
+        transform: rotate3d(0,2,0,60deg);
+    }
+    30% {
+        transform: rotate3d(0,2,0,90deg);
+    }
+    90% {
+        transform: rotate3d(0,2,0,90deg);
+    }
+    100% {
+        transform: rotate3d(0,2,0,0deg);
+    }
+}
+
+@keyframes CC {
+    0% {
+        border-color: #FFF transparent #FFF #FFF;
+        transform: rotate3d(0,2,0,90deg);
+    }
+    10% {
+        transform: rotate3d(0,2,0,90deg);
+    }
+    30%{
+        transform: rotate3d(0,2,0,0deg);
+    }
+    90% {
+        transform: rotate3d(0,2,0,0deg);
+    }
+    100% {
+        border-color: #FFF transparent #FFF #FFF;
+        transform: rotate3d(0,2,0,90deg);
+    }
+}
+
+@keyframes handL {
+    0% {
+        transform: rotate3d(0,2,0,0deg);
+    }
+    10% {
+        transform: rotate3d(0,2,0,60deg);
+    }
+    30% {
+        transform: rotate3d(0,2,0,90deg);
+    }
+    90% {
+        transform: rotate3d(0,2,0,90deg);
+    }
+    100% {
+        transform: rotate3d(0,2,0,0deg);
+    }
+}
+
+
+@keyframes LL {
+    0% {
+        border-color: transparent transparent white white;
+        transform: rotate3d(0,2,0,90deg);
+    }
+    10% {
+        transform: rotate3d(0,2,0,90deg);
+    }
+    30%{
+        transform: rotate3d(0,2,0,0deg);
+    }
+    90% {
+        transform: rotate3d(0,2,0,0deg);
+    }
+    100% {
+        border-color: transparent transparent white white;
+        transform: rotate3d(0,2,0,90deg);
     }
 }

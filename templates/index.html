@@ -24,17 +24,19 @@
     </form>
     <header>{{ gesture }} detected with <span>{{ certainty }}</span> certainty</header>
     <div class="theater">
-        <div class="hand {{ animation }}">
+        <div class="C" style="animation-name: C{{ animation }}"></div>
+        <div class="L" style="animation-name: L{{ animation }}"></div>
+        <div class="hand" style="animation-name: hand{{ animation }}">
             <div class="fingers">
-                <div class="finger"></div>
-                <div class="fingerSpacing"></div>
-                <div class="finger"></div>
-                <div class="fingerSpacing"></div>
-                <div class="finger"></div>
-                <div class="fingerSpacing"></div>
-                <div class="finger"></div>
-                <div class="fingerSpacing"></div>
-                <div class="thumb"></div>
+                <div class="finger" style="animation-name: fingers{{ animation }}"></div>
+                <div class="fingerSpacing" style="animation-name: fingers{{ animation }}"></div>
+                <div class="finger" style="animation-name: fingers{{ animation }}"></div>
+                <div class="fingerSpacing" style="animation-name: fingers{{ animation }}"></div>
+                <div class="finger" style="animation-name: fingers{{ animation }}"></div>
+                <div class="fingerSpacing" style="animation-name: fingers{{ animation }}"></div>
+                <div class="finger" style="animation-name: fingers{{ animation }}"></div>
+                <div class="fingerSpacing" style="animation-name: fingers{{ animation }}"></div>
+                <div class="thumb" style="animation-name: thumb{{ animation }}"></div>
             </div>
             <div class="palmHand"></div>
         </div>

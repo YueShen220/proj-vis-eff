@@ -1,29 +1,75 @@
 from flask import Flask, render_template, request, jsonify
-import pickle
+import tensorflow as tf
+from tensorflow import keras
+from tensorflow.keras import layers
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.optimizers import Adam
 
 app = Flask(__name__)
-#model = pickle.load(open('model.pkl', 'rb'))
+
+
+def createModel():
+    data_augmentation = keras.Sequential(
+        [
+            layers.experimental.preprocessing.RandomFlip("horizontal",
+                                                         input_shape=(180,
+                                                                      180,
+                                                                      3)),
+            layers.experimental.preprocessing.RandomRotation(0.1),
+            layers.experimental.preprocessing.RandomZoom(0.1),
+        ]
+    )
+
+    modelBuilt = Sequential([
+        data_augmentation,
+        layers.experimental.preprocessing.Rescaling(1. / 255),
+        layers.Conv2D(16, 3, padding='same', activation='relu'),
+        layers.MaxPooling2D(),
+        layers.Conv2D(32, 3, padding='same', activation='relu'),
+        layers.MaxPooling2D(),
+        layers.Conv2D(64, 3, padding='same', activation='relu'),
+        layers.MaxPooling2D(),
+        layers.Conv2D(128, 3, padding='same', activation='relu'),
+        layers.MaxPooling2D(),
+        layers.Dropout(0.2),
+        layers.Flatten(),
+        layers.Dense(1000, activation='relu'),
+        layers.Dense(10)
+    ])
+
+    modelBuilt.compile(
+        optimizer='adam',
+        loss=tf.losses.SparseCategoricalCrossentropy(from_logits=True),
+        metrics=['accuracy'])
+
+    return modelBuilt
+
+
+model = createModel()
+model.load_weights("model_weights.h5")
 
 
 # DONT FORGET TO USE ESCAPE()
 
 def chooseAnimation(gesture):
     animations = {
-        "01_palm": "palm",
+        "None": "NoAnimation",
+        "01_palm": "Palm",
         "02_l": "L",
-        "03_fist": "fist",
-        "04_fist_moved": "fistMove",
-        "05_thumb": "thumb",
-        "06_index": "index",
-        "07_ok": "ok",
-        "08_palm_moved": "palmMove",
+        "03_fist": "Fist",
+        "04_fist_moved": "FistMove",
+        "05_thumb": "Thumb",
+        "06_index": "Index",
+        "07_ok": "Ok",
+        "08_palm_moved": "PalmMove",
         "09_c": "C",
-        "10_down": "downwards"
+        "10_down": "Downwards"
     }
 
     gestures = {
+        "None": "No gesture",
         "01_palm": "Open palm",
-        "02_l": "Fingers in the shape of an L",
+        "02_l": "L shape",
         "03_fist": "Closed fist",
         "04_fist_moved": "A fist moving",
         "05_thumb": "Thumb up",
@@ -40,14 +86,15 @@ def chooseAnimation(gesture):
 @app.route("/", methods=['GET', 'POST'])
 def baseHtml():
 
-    [animation, gesture] = chooseAnimation("01_palm")
+    [animation, gesture] = chooseAnimation("None")
 
-    html = render_template("index.html", animation=animation, gesture=gesture, certainty="99.9%")
+    html = render_template("index.html", animation=animation, gesture=gesture, certainty="N/A")
     return html
 
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    animation = chooseAnimation("09_c")
 
-    return render_template('index.html', gesture=animation, animation=animation, certainty="85.0%")
+    [animation, gesture] = chooseAnimation("03_fist")
+
+    return render_template('index.html', animation=animation, gesture=gesture, certainty="85.0%")
