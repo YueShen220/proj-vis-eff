@@ -56,7 +56,7 @@ main {
     margin: auto;
     color: #5C6F68;
     display: grid;
-    grid-template-rows: 600px 120px 800px;
+    grid-template-rows: 600px 170px 800px;
 }
 
 form {
@@ -78,9 +78,18 @@ form label {
 .box__dragndrop,
 .box__uploading,
 .box__success,
-.box__button,
 .box__error {
     display: none;
+}
+
+.box__button{
+    margin-top: 30px;
+    background: #FBFFFE;
+    color: #E4572E;
+    padding: 15px;
+    border-radius: 5px;
+    font-family: 'ZILAPGEOMETRIK';
+    font-size: 35px;
 }
 
 .box__file {
@@ -99,22 +108,63 @@ form label {
     height: 750px;
     width: 100%;
     outline: 2px dashed black;
+    position: relative;
 }
 
-.aliveRight {
+.hand{
     position: absolute;
+    display: grid;
+    grid-template-rows: 100px 100px;
+
+}
+
+.fingers{
+    display: grid;
+    grid-template-columns: 17px 2px 17px 2px 17px 2px 17px 2px 26px;
+}
+
+.finger{
+    padding: 50px 10px 0px 7px;
+    background-color: white;
+    width: 17px;
+    height: 100px;
+    box-sizing: border-box;
+}
+
+.fingerSpacing{
+    padding: 50px 1px;
+    background-color: black;
+    width: 2px;
+    height: 100px;
+    box-sizing: border-box;
+}
+
+.thumb{
+    margin-top: 40px;
+    padding: 30px 13px;
+    background-color: white;
+    width: 25px;
+    height: 60px;
+    box-sizing: border-box;
+}
+
+.palmHand{
+    margin: 0;
     background-color: white;
     padding: 50px;
     width: 100px;
     height: 100px;
     box-sizing: border-box;
-    border-radius: 25px;
-    animation: actorRight 5s linear 2s infinite;
-    top: 1200px;
+    border-radius: 0 0 25px 25px;
+}
+
+.palm {
+    animation: zoomPalm 5s linear 2s infinite;
+    top: 120px;
     right: 20%;
 }
 
-@keyframes actorRight {
+@keyframes zoomPalm {
     0% {
         right: 20%;
         transform: rotate(0deg);
@@ -137,16 +187,9 @@ form label {
     }
 }
 
-.aliveLeft {
-    position: absolute;
-    background-color: white;
-    padding: 50px;
-    width: 100px;
-    height: 100px;
-    box-sizing: border-box;
-    border-radius: 25px;
+.C {
     animation: actorLeft 5s linear 2s infinite;
-    top: 1200px;
+    top: 120px;
     left: 20%;
 }
 
