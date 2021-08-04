@@ -1,16 +1,16 @@
 @font-face {
     font-family: 'ZILAPGEOMETRIK';
-    src: url('../static/fonts/ZILAPGEOMETRIK.svg') format('svg'),
-    url('../static/fonts/ZILAPGEOMETRIK.ttf') format('truetype'),
-    url('../static/fonts/ZILAPGEOMETRIK.woff') format('woff');
+    src: url('fonts/ZILAPGEOMETRIK.svg') format('svg'),
+    url('fonts/ZILAPGEOMETRIK.ttf') format('truetype'),
+    url('fonts/ZILAPGEOMETRIK.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'ZilapGeometrik-VnKy';
-    src: url('../static/fonts/ZilapGeometrik-VnKy.eot');
-    src: url('../static/fonts/ZilapGeometrik-VnKy.eot?#iefix') format('embedded-opentype');
+    src: url('fonts/ZilapGeometrik-VnKy.eot');
+    src: url('fonts/ZilapGeometrik-VnKy.eot?#iefix') format('embedded-opentype');
     font-weight: normal;
     font-style: normal;
 }

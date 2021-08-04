@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, jsonify
+import pickle
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
@@ -11,12 +12,12 @@ app = Flask(__name__)
 def createModel():
     data_augmentation = keras.Sequential(
         [
-            layers.experimental.preprocessing.RandomFlip("horizontal",
-                                                         input_shape=(180,
-                                                                      180,
-                                                                      3)),
-            layers.experimental.preprocessing.RandomRotation(0.1),
-            layers.experimental.preprocessing.RandomZoom(0.1),
+             layers.experimental.preprocessing.RandomFlip("horizontal",
+                                                          input_shape=(180,
+                                                                       180,
+                                                                       3)),
+             layers.experimental.preprocessing.RandomRotation(0.1),
+             layers.experimental.preprocessing.RandomZoom(0.1),
         ]
     )
 
@@ -45,8 +46,7 @@ def createModel():
     return modelBuilt
 
 
-model = createModel()
-model.load_weights("model_weights.h5")
+model = pickle.load(open('model_keras.pkl', 'rb'))
 
 
 # DONT FORGET TO USE ESCAPE()
