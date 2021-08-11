@@ -10,17 +10,12 @@
 <h1> AI Launch Lab </h1>
 <h2> OAYE VFX: making visuals from gestures</h2>
 <main>
-    <form class="box" method="post" action="{{ url_for('predict') }}" enctype="multipart/form-data">
+    <form class="box" method="POST" action="{{ url_for('baseHtml') }}" enctype="multipart/form-data">
         <div class="box__input">
-            <input class="box__file" type="file" name="files[]" id="file"
-                   data-multiple-caption="{count} files selected" multiple/>
-            <label for="file"><strong>Choose a PNG file</strong><span class="box__dragndrop"> or drag it
-                            here</span>.</label><br>
-            <button class="box__button" type="submit">Upload</button>
+            <input type="file" name="image_file" accept="image/*">
+            <label for="image_file"><strong>Choose a PNG file</strong></label><br>
+            <button class="box__button" name="uploader" type="submit" value="Submit">Upload</button>
         </div>
-        <div class="box__uploading">Uploading…</div>
-        <div class="box__success">Done!</div>
-        <div class="box__error">Error! <span></span>.</div>
     </form>
     <header>{{ gesture }} detected with <span>{{ certainty }}</span> certainty</header>
     <div class="theater">
