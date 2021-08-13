@@ -1,33 +1,16 @@
-# from flask import Flask, render_template, request, jsonify
-# import pickle
-# import tensorflow as tf
-# from tensorflow import keras
-# from tensorflow.keras import layers
-# from tensorflow.keras.models import Sequential
-# from tensorflow.keras.optimizers import Adam
-
 import copy
 import cv2
 import numpy as np
 from keras.models import load_model
-# from phue import Bridge
-# from soco import SoCo
 import pygame
 import time
-
-import tensorflow as tf
-from tensorflow import keras
-from tensorflow.keras import layers
-from tensorflow.keras.models import Sequential
 
 # General Settings
 prediction = ''
 action = ''
 score = 0
-img_counter = 500
+Audio = True
 
-
-#pygame.event.wait()
 
 class Volume(object):
     def __init__(self):
@@ -44,16 +27,6 @@ class Volume(object):
 
 vol = Volume()
 
-# # Philips Hue Settings
-# bridge_ip = '192.168.0.103'
-# b = Bridge(bridge_ip)
-# on_command = {'transitiontime': 0, 'on': True, 'bri': 254}
-# off_command = {'transitiontime': 0, 'on': False, 'bri': 254}
-
-# # Sonos Settings
-# sonos_ip = '192.168.0.104'
-# sonos = SoCo(sonos_ip)
-
 gesture_names = {1: 'Palm',
                  2: 'L',
                  3: 'Fist',
@@ -66,11 +39,6 @@ gesture_names = {1: 'Palm',
                  10: 'Down'}
 
 model = load_model('/Users/lenovo/Downloads/VGG_model.h5')
-
-def predict_rgb_image(img):
-    result = gesture_names[model.predict_classes(img)[0]]
-    print(result)
-    return (result)
 
 
 def predict_rgb_image_vgg(image):
@@ -85,7 +53,8 @@ def predict_rgb_image_vgg(image):
     print(result)
     return result, score
 
-# parameters
+
+# Image preprocesssing parameters
 cap_region_x_begin = 0.5  # start point/total width
 cap_region_y_end = 0.8  # start point/total width
 threshold = 60  # binary threshold
@@ -93,7 +62,7 @@ blurValue = 41  # GaussianBlur parameter
 bgSubThreshold = 50
 learningRate = 0
 
-# variableslt
+# Variables
 isBgCaptured = 0  # bool, whether the background captured
 triggerSwitch = False  # if true, keyboard simulator works
 
@@ -105,8 +74,9 @@ def remove_background(frame):
     res = cv2.bitwise_and(frame, frame, mask=fgmask)
     return res
 
+
 # Camera
-camera = cv2.VideoCapture(0)
+camera = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 camera.set(10, 200)
 
 while camera.isOpened():
@@ -122,27 +92,24 @@ while camera.isOpened():
     if isBgCaptured == 1:
         img = remove_background(frame)
         img = img[0:int(cap_region_y_end * frame.shape[0]),
-              int(cap_region_x_begin * frame.shape[1]):frame.shape[1]]  # clip the ROI
-        # cv2.imshow('mask', img)
+                  int(cap_region_x_begin * frame.shape[1]):frame.shape[1]]  # clip the ROI
 
         # convert the image into binary image
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         blur = cv2.GaussianBlur(gray, (blurValue, blurValue), 0)
-        # cv2.imshow('blur', blur)
-        ret, thresh = cv2.threshold(blur, threshold, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+        ret, thresh = cv2.threshold(
+            blur, threshold, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
         # Add prediction and action text to thresholded image
-        # cv2.putText(thresh, f"Prediction: {prediction} ({score}%)", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255))
-        # cv2.putText(thresh, f"Action: {action}", (50, 100), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255))  # Draw the text
-        # Draw the text
         cv2.putText(thresh, f"Prediction: {prediction} ({score}%)", (50, 30), cv2.FONT_HERSHEY_SIMPLEX, 1,
                     (255, 255, 255))
         cv2.putText(thresh, f"Action: {action}", (50, 80), cv2.FONT_HERSHEY_SIMPLEX, 1,
                     (255, 255, 255))  # Draw the text
-        cv2.imshow('ori', thresh)
+        cv2.imshow('binary', thresh)
 
         # get the contours
         thresh1 = copy.deepcopy(thresh)
-        _, contours, hierarchy = cv2.findContours(thresh1, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+        contours, hierarchy = cv2.findContours(
+            thresh1, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
         length = len(contours)
         maxArea = -1
         if length > 0:
@@ -159,7 +126,7 @@ while camera.isOpened():
             cv2.drawContours(drawing, [res], 0, (0, 255, 0), 2)
             cv2.drawContours(drawing, [hull], 0, (0, 0, 255), 3)
 
-        cv2.imshow('output', drawing)
+        cv2.imshow('contours', drawing)
 
     # Keyboard OP
     k = cv2.waitKey(10)
@@ -167,13 +134,13 @@ while camera.isOpened():
         break
     elif k == ord('b'):  # press 'b' to capture the background
         bgModel = cv2.createBackgroundSubtractorMOG2(0, bgSubThreshold)
-        b.set_light(6, on_command)
         time.sleep(2)
         isBgCaptured = 1
         print('Background captured')
         pygame.init()
         pygame.mixer.init()
-        pygame.mixer.music.load('/Users/lenovo/Downloads/***.mp3')
+        pygame.mixer.music.load(
+            '/Users/lenovo/Downloads/bensound-tenderness.mp3')
         pygame.mixer.music.set_volume(vol.level)
         pygame.mixer.music.play()
         pygame.mixer.music.set_pos(50)
@@ -194,23 +161,26 @@ while camera.isOpened():
         target = target.reshape(1, 224, 224, 3)
         prediction, score = predict_rgb_image_vgg(target)
 
-        if save_images:
-            img_name = f"./frames/drawings/drawing_{selected_gesture}_{img_counter}.jpg".format(
-                img_counter)
-            cv2.imwrite(img_name, drawing)
-            print("{} written".format(img_name))
+        if Audio:
+            if prediction == 'Palm' or prediction == 'Fist':
+                action = "Music off"
+                pygame.mixer.music.pause()
 
-            img_name2 = f"./frames/silhouettes/{selected_gesture}_{img_counter}.jpg".format(
-                img_counter)
-            cv2.imwrite(img_name2, thresh)
-            print("{} written".format(img_name2))
+            elif prediction == 'Down' or prediction == 'C':
+                action = 'Volume down'
+                vol.decrease(0.2)
+                pygame.mixer.music.set_volume(vol.level)
 
-            img_name3 = f"./frames/masks/mask_{selected_gesture}_{img_counter}.jpg".format(
-                img_counter)
-            cv2.imwrite(img_name3, img)
-            print("{} written".format(img_name3))
+            elif prediction == 'Okay'or prediction == 'L':
+                action = 'Music on'
+                pygame.mixer.music.unpause()
 
-            img_counter += 1
+            elif prediction == 'Index' or prediction == 'Thumb':
+                action = 'Volume up'
+                vol.increase(0.2)
+                pygame.mixer.music.set_volume(vol.level)
+            else:
+                pass
 
     elif k == ord('t'):
 
@@ -231,7 +201,8 @@ while camera.isOpened():
         # set up the ROI for tracking
         roi = imCrop
         hsv_roi = cv2.cvtColor(roi, cv2.COLOR_BGR2HSV)
-        mask = cv2.inRange(hsv_roi, np.array((0., 60., 32.)), np.array((180., 255., 255.)))
+        mask = cv2.inRange(hsv_roi, np.array((0., 60., 32.)),
+                           np.array((180., 255., 255.)))
         roi_hist = cv2.calcHist([hsv_roi], [0], mask, [180], [0, 180])
         cv2.normalize(roi_hist, roi_hist, 0, 255, cv2.NORM_MINMAX)
         # Setup the termination criteria, either 10 iteration or move by at least 1 pt
