@@ -25,16 +25,16 @@
 
 ## Limitations and Progress
 ### Limited size and diversity of dataset:
-  - **Consequences:** reduced the accuracy of model prediction, even though cross validation and train-test split are applied;
+  - **Consequences:** Reduced the accuracy of model prediction, even though cross validation and train-test split are applied;
     made it nearly impossible to predict colorful gesture images that are close to our everyday lives.
-  - **Progress:** used OpenCV (background masking and binary image thresholding) to preprocess images into binary black-and -white images, then sent into the model;
+  - **Progress:** Used OpenCV (background masking and binary image thresholding) to preprocess images into binary black-and -white images, then sent into the model;
     transformed the image dataset into binary images, then trained the model using this newly-generated dataset; 
-    (tried to use data augmentation but found of limited value in the improvement of model accuracy, because original dataset already inherited properties such as ramdom flip and     random rotation)
-  - **Effects:** model accuracy has been much improved, is able to predict colorful and daily gesture images but would be improved more if training dataset can be colorful and         random with higher diversity
+    (tried to use data augmentation but found of limited value in the improvement of model accuracy, because original dataset already inherited properties such as ramdom flip and     random rotation).
+  - **Effects:** Model accuracy has been much improved, is able to predict colorful and daily gesture images but would be improved more if training dataset can be colorful and         random with higher diversity.
 ### Model selection:
   - **Initial Trial:** CNNs has been proved very suitable for training on image dataset, as such initially standard Keras layers such as Dense, Flatten were randomly added to         build the model with all activation functions being ReLU.
   - **Weakness:** However, a large number of hyper-parameters were used, leading to the overfitting of model, and could hardly predict new images even though they are black-and-       white.
-  - **Progress:** changed the model into a pre-trained model based on VGG-16 architecture, which is well-known for lightening the number of parameters and overcoming overfitting       issues; results were improved by applying this
+  - **Progress:** Changed the model into a pre-trained model based on VGG-16 architecture, which is well-known for lightening the number of parameters and overcoming overfitting       issues; results were improved by applying this.
 ### Front-end applications:
    - Due to the lack of physical smart-home devices such as Philips Hue and low computations of PCs, it's hard to extend our animations and explore more on visual effects that          we initially would like to implement.
    - We are very willing to continue our research and develop further on optimizing this project!
